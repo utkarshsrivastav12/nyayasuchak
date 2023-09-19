@@ -253,3 +253,97 @@
   new PureCounter();
 
 })()
+
+document.addEventListener('DOMContentLoaded', function () {
+  const chatbotIcon = document.getElementById('chatbot-icon');
+  const chatbotWindow = document.getElementById('chatbot-window');
+  const chatbotCloseBtn = document.getElementById('chatbot-close-btn');
+  const userInputElement = document.getElementById('user-input');
+  const sendButton = document.getElementById('send-button');
+  const chatbotBody = document.getElementById('chatbot-body');
+
+  chatbotIcon.addEventListener('click', function () {
+      chatbotWindow.style.display = 'block';
+      chatbotIcon.style.display='none';
+  });
+
+  chatbotCloseBtn.addEventListener('click', function () {
+      chatbotWindow.style.display = 'none';
+      chatbotIcon.style.display='block';
+
+  });
+
+  // Define a JavaScript Map to store legal rights Q&A in India
+const legalRightsInIndiaMap = new Map();
+
+// Add legal rights Q&A to the Map
+legalRightsInIndiaMap.set('What are fundamental rights in India?', 'Fundamental rights are a set of legal rights guaranteed to the citizens of India by the Constitution. They include the right to equality, right to freedom, rights against exploitation, right to freedom of religion, cultural and educational rights, and constitutional remedies.');
+
+legalRightsInIndiaMap.set('What is the right to equality?', 'The right to equality ensures equality before the law and prohibits discrimination on the grounds of religion, race, caste, sex, or place of birth.');
+
+legalRightsInIndiaMap.set('What is the right to freedom?', 'The right to freedom includes freedom of speech and expression, freedom to assemble peacefully, freedom to form associations or unions, and freedom to move freely throughout India.');
+
+legalRightsInIndiaMap.set('What are the rights against exploitation?', 'Rights against exploitation prohibit forced labor and child labor. They aim to prevent the exploitation of vulnerable individuals, especially children.');
+
+legalRightsInIndiaMap.set('What is the right to freedom of religion?', 'The right to freedom of religion guarantees individuals the freedom to profess, practice, and propagate the religion of their choice. It also protects religious institutions from government interference.');
+
+legalRightsInIndiaMap.set('What are cultural and educational rights?', 'Cultural and educational rights protect the rights of minorities to establish and administer educational institutions of their choice. They aim to preserve the cultural and educational autonomy of minority communities.');
+
+legalRightsInIndiaMap.set('What are constitutional remedies?', 'Constitutional remedies provide legal mechanisms for individuals to enforce their fundamental rights through writ petitions and other legal avenues.');
+
+legalRightsInIndiaMap.set('Who are fundamental rights applicable to?', 'Fundamental rights are primarily applicable to Indian citizens, but some of these rights are available to foreigners as well.');
+
+legalRightsInIndiaMap.set('Can fundamental rights be restricted?', 'Yes, fundamental rights can be restricted by the government under specific circumstances, such as national security or public order, but these restrictions must be reasonable and in accordance with the law.');
+
+legalRightsInIndiaMap.set('What legal remedies are available if fundamental rights are violated?', 'Individuals can approach the courts, including the Supreme Court and High Courts, to seek legal remedies if their fundamental rights are violated. They can file writ petitions and other legal actions for redressal.');
+
+// Accessing information from the Map
+const question = 'What is the right to freedom?';
+console.log(legalRightsInIndiaMap.get(question));
+
+
+
+  sendButton.addEventListener('click', function () {
+      const userMessage = userInputElement.value.trim();
+      if (userMessage !== '') {
+          addUserMessage(userMessage);
+          // Simulate a response from the chatbot (you can replace this with actual logic)
+          setTimeout(function () {
+            if(userMessage=='Hi'|| userMessage=='hi'){
+              const response = getChatbotResponse("Hello!");
+              addChatbotMessage(response);
+            }
+            else{
+              const response = getChatbotResponse(legalRightsInIndiaMap.get(userMessage));
+              addChatbotMessage(response);
+              }
+             
+          }, 500);
+          userInputElement.value = '';
+      }
+  });
+
+  // Function to add user message to the chat window
+  function addUserMessage(message) {
+      const userMessageDiv = document.createElement('div');
+      userMessageDiv.className = 'chat-message sent';
+      userMessageDiv.textContent = message;
+      chatbotBody.appendChild(userMessageDiv);
+  }
+
+  // Function to add chatbot message to the chat window
+  function addChatbotMessage(message) {
+      const chatbotMessageDiv = document.createElement('div');
+      chatbotMessageDiv.className = 'chat-message received';
+      chatbotMessageDiv.textContent = message;
+      chatbotBody.appendChild(chatbotMessageDiv);
+  }
+
+  // Simulated chatbot response (replace with your logic)
+  function getChatbotResponse(userMessage) {
+      // Replace this with your own logic for generating chatbot responses
+      // For now, just echo the user's message
+      
+      return  userMessage;
+  }
+});
