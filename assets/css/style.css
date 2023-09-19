@@ -1352,6 +1352,7 @@ height: 50px;
   right: 20px;
   cursor: pointer;
   z-index: 1000;
+  margin-bottom: 50px;
 }
 
 #chatbot-icon-img {
